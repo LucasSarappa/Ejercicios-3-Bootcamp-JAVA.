@@ -59,7 +59,7 @@ public class ListaSecuencial2 {
 
 
 
-    public static List<Integer> obtenerListaSecuencialCon1Condicion(Integer desde, Integer hasta, List<Predicate<Integer>> condicion) {
+    private static List<Integer> obtenerListaSecuencialCon1Condicion(Integer desde, Integer hasta, List<Predicate<Integer>> condicion) {
         return IntStream.rangeClosed(desde, hasta)
                 .filter(n -> condicion.stream().allMatch(cond -> cond.test(n)))
                 .boxed()
@@ -67,7 +67,7 @@ public class ListaSecuencial2 {
     }
 
 
-    public static List<Integer> obtenerListaSecuencialCondicionadaMultiple1(Integer desde, Integer hasta, List<Predicate<Integer>> condiciones3) {
+    private static List<Integer> obtenerListaSecuencialCondicionadaMultiple1(Integer desde, Integer hasta, List<Predicate<Integer>> condiciones3) {
         return IntStream.rangeClosed(desde, hasta)
                 .filter(n -> {
                     for (Predicate<Integer> condicion : condiciones3) {
@@ -81,7 +81,7 @@ public class ListaSecuencial2 {
                 .collect(Collectors.toList());
     }
 
-    public static List<Integer> obtenerListaSecuencialCondicionadaMultiple2(Integer desde, Integer hasta, Predicate<Integer>[] condiciones) {
+    private static List<Integer> obtenerListaSecuencialCondicionadaMultiple2(Integer desde, Integer hasta, Predicate<Integer>[] condiciones) {
         List<Integer> resultado = new ArrayList<>();
 
         for (int i = desde; i <= hasta; i++) {
@@ -102,7 +102,7 @@ public class ListaSecuencial2 {
         return resultado;
     }
 
-    public static List<Integer> obtenerListaSecuencialCondicionadaMultiple3(int desde, int hasta, IntPredicate... condiciones) {
+    private static List<Integer> obtenerListaSecuencialCondicionadaMultiple3(int desde, int hasta, IntPredicate... condiciones) {
         IntPredicate condicionFinal = Arrays.stream(condiciones)
                 .reduce(IntPredicate::and)
                 .orElse(n -> true);
